@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('masyarakat', function (Blueprint $table) {
-            $table->integer('nik', 22);
-            $table->string('nama', 35);
-            $table->string('username', 35);
-            $table->string('telp', 13);
-            $table->string('password', 255);
+        Schema::create('masyarakats', function (Blueprint $table) {
+            $table->string('nik')->primary();
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('masyarakat');
+        Schema::dropIfExists('masyarakats');
     }
 };

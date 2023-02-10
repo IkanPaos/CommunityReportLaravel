@@ -29,6 +29,10 @@
                 <input type="password" name="password" id="password" value="{{ old('password')}}" /><br><br>
             </td><br>
             <td>
+                <label>Konfirmasi Password :</label><br>
+                <input type="password" name="password_confirm" id="password_confirm" value="{{ old('password')}}" /><br><br>
+            </td><br>
+            <td>
                 <button class="btn btn-primary">Register</button>
             </td>
         </form>
