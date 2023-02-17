@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Masyarakat extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nik',
+        'user_id'
+    ];
 }

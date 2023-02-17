@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 class MasyarakatController extends Controller
 {
-    public function index()
+    public function index() 
     {
         return view('masyarakat.dashboard');
     }
+
+    
 }

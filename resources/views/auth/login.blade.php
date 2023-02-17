@@ -7,18 +7,17 @@
     <title>Login</title>
 </head>
 <body>
-
+    @if (session('success'))
+    <p>{{session('success')}}</p>  
+    @endif
+    @if ($errors->any())
+    @foreach ($errors->all() as $err)
+    <p>{{$err}}</p>        
+    @endforeach
+    @endif
 <center>
-
-        @if(session('success'))
-        <p>{{ session('success') }}</p>
-        @endif
-        @if($errors->any())
-        @foreach($errors->all() as $err)
-        <p>{{ $err }}</p>
-        @endforeach
-        @endif
-        <form action="{{ route('login.action') }}" method="POST">
+    <h1>Login</h1>
+        <form action="{{ route('login') }}" method="POST">
             @csrf
             <td>
                 <label>Username :</label><br>
@@ -32,7 +31,7 @@
                 <button>Login</button>
             </td>
         </form>
-        <a href="{{ route('register') }}"><button>Register</button></a>
+        <a href="{{route('register.action')}}"><button>Register</button></a>
     </center>
     
 </body>

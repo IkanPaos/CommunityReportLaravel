@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Masyarakat;
-use App\Models\Petugas;
 
 class User extends Authenticatable
 {
@@ -20,8 +18,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'nama',
         'username',
         'password',
+        'telp'
     ];
 
     /**
@@ -43,13 +43,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function masyarakat()
+    public function masyarakat(): HasOne
     {
         return $this->hasOne(Masyarakat::class);
     }
 
-    public function petugas()
+    public function petugas() 
     {
-        return $this->hasOne(Petugas::class);
+        return $this->haOne(Petugas::class);
     }
 }

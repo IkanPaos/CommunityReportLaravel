@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pengaduans', function (Blueprint $table) {
-            $table->id('id_pengaduan');
-            $table->date('tgl_pengaduan');
-            $table->string('nik');
-            $table->foreign('nik')->references('nik')->on('masyarakats');
-            $table->text('isi_laporan');
-            $table->string('foto');
-            $table->enum('status', ['0', 'proses', 'selesai']);
+        Schema::create('petugas', function (Blueprint $table) {
+            $table->id('id_petugas');
+            $table->enum('level', ['admin', 'petugas']);
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengaduans');
+        Schema::dropIfExists('petugas');
     }
 };

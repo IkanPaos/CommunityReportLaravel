@@ -1,12 +1,21 @@
-@extends('app')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
 
         @if ($errors->any())
         @foreach ($errors->all() as $err)
         <p>{{ $err }}</p>
         @endforeach
         @endif
-        <form action="{{ route ('register.action')}}" method="POST">
+        <form action="{{ route('register.action')}}" method="POST">
             @csrf
             <td>
                 <label>NIK :</label><br>
@@ -33,8 +42,9 @@
                 <input type="password" name="password_confirm" id="password_confirm" value="{{ old('password')}}" /><br><br>
             </td><br>
             <td>
-                <button class="btn btn-primary">Register</button>
+                <button>Register</button>
             </td>
         </form>
     
-@endsection
+</body>
+</html>

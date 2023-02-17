@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 <body>
     <h1>Dashboard Petugas</h1>   
+    <a href="/petugas/admin">Detail Petugas</a>
+    <a href="{{route('petugas.report')}}">Detail Laporan</a>
+    <a href="/petugas/masyarakat">Daftar Masyarakat</a>
     <form action="{{ route('logout') }}" method="post">
         @csrf
         <input type="submit" value="Keluar">
