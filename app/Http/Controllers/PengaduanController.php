@@ -6,6 +6,8 @@ use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Dompdf\Dompdf;
+use PDF;
 
 
 class PengaduanController extends Controller
@@ -90,12 +92,36 @@ class PengaduanController extends Controller
 
         }
 
-        return redirect()->route('masyarakat.dashboard');
+        return redirect()->route('masyarakat');
     }
 
     public function delete($id) {
         $pengaduan = DB::table('pengaduans')->where('id_pengaduan',$id)->delete();
 
-        return redirect('masyarakat.dashboard');
+        return redirect('masyarakat');
     }
+
+    public function printPdf()
+    {
+    // Retrieve the data from your model or repository
+    $listPengaduan = Pengaduan::all();
+
+    $pdf = PDF::loadView('print.datapdf', compact('listPengaduan'))->setOptions([
+        'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true,
+        'debugCss' => true, 'debugLayout' => true, 'debugLayoutLines' => true,
+        'debugLayoutPaddingBox' => true, 'chroot' => public_path(),
+    ]);
+
+    // Generate the HTML for the PDF
+    $html = view('print.datapdf')->with('listPengaduan', $listPengaduan)->render();
+
+    // Generate the PDF using Dompdf
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'landscape');
+    $dompdf->render();
+
+    // Return the PDF as a download
+    return $dompdf->stream('laporan.pdf');
+}
 }

@@ -13,4 +13,9 @@ class Masyarakat extends Model
         'nik',
         'user_id'
     ];
+
+    public function masyarakat()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

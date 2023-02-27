@@ -10,6 +10,10 @@
     <h1>Dashboard Masyarakat</h1>
     <br><br>
     <a href="{{route('masyarakat.create')}}">Laporkan</a>
+    <form action="{{ route('logout') }}" method="post">
+        @csrf
+        <input type="submit" value="Keluar">
+    </form> 
     @foreach ($pengaduan as $data)
         <p>Tanggal : <?= $data->tgl_pengaduan ?></p>
         <p>NIK : <?= $data->nik ?></p>

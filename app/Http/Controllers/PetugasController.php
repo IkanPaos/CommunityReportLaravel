@@ -2,15 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Petugas;
+use Barryvdh\DomPDF\PDF;
 use App\Models\Pengaduan;
+use App\Models\Masyarakat;
+use App\Models\Tanggapan;
 use Illuminate\Http\Request;
+
 
 class PetugasController extends Controller
 {
     public function index()
     {
         return view('petugas.dashboard');
+    }
+
+    public function tampiladmin()
+    {
+        $admin = Petugas::with('petugas')->get();
+
+        return view('petugas.admin', ['listAdmin' => $admin]);
+    }
+
+    public function tampilmasyarakat()
+    {
+        $masyarakat = Masyarakat::with('masyarakat')->get();
         
+        return view('petugas.masyarakat', ['listMasyarakat' => $masyarakat]);
     }
 
     public function tampilpengaduan()
@@ -35,12 +53,19 @@ class PetugasController extends Controller
 
     public function destroy($id)
     {
-       $pengaduan = Pengaduan::find($id)->delete();
+       $pengaduan = Pengaduan::where('id_pengaduan',$id)->delete();
         return redirect('/petugas/report');
     }
 
-    public function tampilmasyarakat()
+    public function deleteadmin($id)
     {
-        $pengaduan = DB::table('users')->where('id_pengaduan',$id)->first();
+       $admin = Petugas::find($id)->delete();
+        return redirect('/petugas/admin');
+    }
+
+    public function deletemasyarakat($id)
+    {
+       $admin = Masyarakat::find($id)->delete();
+        return redirect('/petugas/masyarakat');
     }
 }
